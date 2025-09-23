@@ -1,35 +1,36 @@
 # Business Card OCR System
 
-A production-level web application that extracts contact information from business card images using OCR (Optical Character Recognition) and generates vCard files.
+A production-level web application that extracts contact information from business card images using OCR (Optical Character Recognition) and generates vCard and CSV files.
 
 ## Features
 
 - 🖼️ **Image Processing**: Supports multiple image formats (JPG, PNG, BMP, TIFF, WebP)
-- 🔍 **OCR Technology**: Uses Tesseract OCR for accurate text extraction
-- 🤖 **AI-Powered Parsing**: Leverages OpenAI GPT for intelligent data extraction
-- 📱 **vCard Generation**: Creates standard vCard (.vcf) files for contact import
-- 🌐 **Web Interface**: User-friendly web application
-- 📊 **REST API**: Full API for programmatic access
+- 🔍 **OCR Technology**: Uses Rapid OCR for accurate text extraction
+- 🤖 **AI-Powered Parsing**: Leverages Google's Gemini-1.5-flash for intelligent data extraction
+- 📱 **vCard and CSV Generation**: Creates standard vCard (.vcf) files for contact import and CSV files for database management.
+- 🌐 **Web Interface**: User-friendly web application (JS/CSS/HTML)
+- 📊 **REST API**: Full API for programmatic access 
 - ✅ **Data Validation**: Robust input validation and error handling
 
 ## Architecture
 
 The system consists of several modular services:
 
-- **OCR Service**: Handles image preprocessing and text extraction using Tesseract
-- **Parser Service**: Uses OpenAI GPT to extract structured data from raw OCR text  
+- **OCR Service**: Handles image preprocessing and text extraction using RapidOCR
+- **Parser Service**: Uses Google Gemini-1.5-flash to extract structured data from raw OCR text  
 - **vCard Service**: Generates standard vCard format from structured data
-- **FastAPI Application**: Provides web interface and REST API endpoints
+- **CSV Service**: Generates CSV format from a structured database
+- **FastAPI Application**: Provides a web interface and REST API endpoints
 
 ## Installation
 
 ### Prerequisites
 
 1. **Python 3.8+**
-2. **Tesseract OCR**:
-   - Ubuntu/Debian: `sudo apt-get install tesseract-ocr`
-   - macOS: `brew install tesseract`
-   - Windows: Download from [GitHub](https://github.com/UB-Mannheim/tesseract/wiki)
+2. **Rapid OCR**:
+- Ubuntu/Debian: `sudo apt-get install rapid-ocr`
+- macOS: `brew install rapid-ocr`
+- Windows: Download from [GitHub](https://github.com/RapidAI/RapidOCR)
 3. **OpenAI API Key** (for structured data extraction)
 
 ### Setup
@@ -42,9 +43,7 @@ pip install -r requirements.txt
 2. **Configure environment**:
 Create a `.env` file with:
 ```env
-OPENAI_API_KEY=your_openai_api_key_here
-OPENAI_MODEL=gpt-3.5-turbo
-TESSERACT_CMD=/usr/bin/tesseract  # Path to tesseract (optional)
+GEMINI_API_KEY="YOUR API_KEY (FROM GOOGLE AI STUDIO)"
 ```
 
 3. **Run the application**:
@@ -60,9 +59,8 @@ The application will be available at `http://localhost:8000`
 
 1. Navigate to `http://localhost:8000`
 2. Upload a business card image
-3. Choose options (vCard generation, raw text inclusion)
-4. Click "Process Business Card"
-5. View extracted information and download vCard
+3. Click "Process Business Card"
+4. View extracted information and download vCard and CSV files.
 
 ### API Usage
 
@@ -82,15 +80,15 @@ curl -X POST "http://localhost:8000/process-card" \
 ```json
 {
   "success": true,
-  "raw_text": "John Doe\nSoftware Engineer\n...",
+  "raw_text": "Dev Dahiya\nSoftware Engineer\n...",
   "structured_data": {
-    "first_name": "John",
-    "last_name": "Doe",
-    "company_name": "Tech Corp",
+    "first_name": "Dev",
+    "last_name": "Dahiya",
+    "company_name": "ZincPlus",
     "position": "Software Engineer",
-    "email": "john@techcorp.com",
+    "email": "dev@zp.com",
     "mobile": "+1234567890",
-    "website": "https://techcorp.com"
+    "website": "https://zincplus.in"
   },
   "vcard": "BEGIN:VCARD\nVERSION:3.0\n...",
   "error_message": null
@@ -103,8 +101,7 @@ Key configuration options in `config.py`:
 
 - `MAX_FILE_SIZE`: Maximum upload size (default: 10MB)
 - `ALLOWED_EXTENSIONS`: Supported image formats
-- `OPENAI_MODEL`: OpenAI model to use (default: gpt-3.5-turbo)
-- `TESSERACT_CMD`: Path to tesseract executable
+- `GOOGLE_MODEL`: Google model to use (default: gemini-1.5-flash)
 
 ## Data Models
 
@@ -134,10 +131,10 @@ The system includes comprehensive error handling:
 - **API errors**: Proper error responses with detailed messages
 - **Data validation**: Pydantic models ensure data integrity
 
-## Performance Optimization
+## Performance Optimisation
 
 - **Image preprocessing**: Automatic resizing and format conversion
-- **Efficient OCR**: Optimized Tesseract configuration for business cards
+- **Efficient OCR**: Optimised RapidOCR configuration for business cards
 - **Async operations**: FastAPI async support for better concurrency
 - **Resource cleanup**: Automatic temporary file cleanup
 
@@ -182,9 +179,8 @@ Once running, visit `http://localhost:8000/docs` for interactive API documentati
 
 ### Common Issues
 
-1. **Tesseract not found**:
-   - Ensure tesseract is installed
-   - Set `TESSERACT_CMD` in environment variables
+1. **RapidOCR not found**:
+   - Ensure Rapid is installed
 
 2. **OpenAI API errors**:
    - Verify API key is valid
@@ -193,7 +189,7 @@ Once running, visit `http://localhost:8000/docs` for interactive API documentati
 
 3. **Image processing errors**:
    - Check image format is supported
-   - Verify image is not corrupted
+   - Verify the image is not corrupted
    - Ensure image contains readable text
 
 4. **Poor OCR results**:
