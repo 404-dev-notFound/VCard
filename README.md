@@ -182,7 +182,7 @@ Once running, visit `http://localhost:8000/docs` for interactive API documentati
 1. **RapidOCR not found**:
    - Ensure Rapid is installed
 
-2. **OpenAI API errors**:
+2. **GOOGLE API errors**:
    - Verify API key is valid
    - Check API usage limits
    - Ensure sufficient credits
