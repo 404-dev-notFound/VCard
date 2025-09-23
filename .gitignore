@@ -1,0 +1,5 @@
+/.env
+/.venv
+/telegram_bot.py
+/uploads
+/__pycache__

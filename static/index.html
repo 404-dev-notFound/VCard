@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card OCR System</title>
+    <link rel="icon" type="image/gif" href="/static/icon.png">
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/app.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Business Card OCR System Demo</h1>
+            <p class="subtitle">Upload a business card image to extract contact information and generate vCard and CSV format.</p>
+        </header>
+
+        <main class="main">
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="card">
+                    <div class="card__body">
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📄</div>
+                            <h3>Upload Business Card Image</h3>
+                            <p>Drag and drop your business card image here, or click to browse</p>
+                            <input type="file" id="fileInput" multiple accept="image/*" hidden>
+                            <label for="fileInput" id="uploadArea">
+                                </label>
+                            <button class="btn btn--primary" onclick="document.getElementById('fileInput').click()">
+                                Choose File
+                            </button>
+                        </div>
+                        
+                        <div class="demo-option">
+                            <p>Or try our demo with sample data:</p>
+                            <button class="btn btn--secondary" id="demoBtn">Use Demo Business Card</button>
+                        </div>
+
+                        <div class="file-info hidden" id="fileInfo">
+                            <div class="file-details">
+                                <span class="file-name" id="fileName"></span>
+                                <span class="file-size" id="fileSize"></span>
+                            </div>
+                            <button class="btn btn--primary" id="processBtn">Process Image</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Section -->
+            <section class="processing-section hidden" id="processingSection">
+                <div class="card">
+                    <div class="card__body">
+                        <div class="processing-animation">
+                            <div class="spinner"></div>
+                            <h3>Processing Business Card...</h3>
+                            <p class="processing-step" id="processingStep">Initializing OCR engine...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <div class="results-header">
+                    <h2>Extraction Results</h2>
+                    <button class="btn btn--outline" id="resetBtn">Process Another Card</button>
+
+                    <button id="exportBtn" class="btn btn-secondary hidden">Export CSV</button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="structured">Structured Data</button>
+                    <button class="tab-btn" data-tab="vcard">vCard Format</button>
+                    <button class="tab-btn" data-tab="raw">Raw OCR Text</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Structured Data Tab -->
+                    <div class="tab-panel active" id="structured">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Contact Information</h3>
+                                <span class="status status--success">Extracted Successfully</span>
+                            </div>
+                            <div class="card__body">
+                                <div class="data-grid" id="dataGrid">
+                                    <!-- Data will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- vCard Tab -->
+                    <div class="tab-panel" id="vcard">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>vCard Format</h3>
+                                <button class="btn btn--primary" id="downloadBtn">Download .vcf File</button>
+                            </div>
+                            <div class="card__body">
+                                <pre class="vcard-output" id="vcardOutput"></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Raw Text Tab -->
+                    <div class="tab-panel" id="raw">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Raw OCR Text</h3>
+                                <span class="status status--info">Tesseract Engine</span>
+                            </div>
+                            <div class="card__body">
+                                <pre class="raw-text" id="rawText"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 ODeX Card OCR System. Built with Rapid OCR and GoogleAI.</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
