@@ -8,7 +8,7 @@ A production-level web application that extracts contact information from busine
 
 - 🖼️ **Image Processing**: Supports multiple image formats (JPG, PNG, BMP, TIFF, WebP)
 - 🔍 **OCR Technology**: Uses Rapid OCR for accurate text extraction
-- 🤖 **AI-Powered Parsing**: Leverages Google's Gemini-1.5-flash for intelligent data extraction
+- 🤖 **AI-Powered Parsing**: Leverages Google's Gemini-2.5-pro for intelligent data extraction
 - 📱 **vCard and CSV Generation**: Creates standard vCard (.vcf) files for contact import and CSV files for database management.
 - 🌐 **Web Interface**: User-friendly web application (JS/CSS/HTML)
 - 📊 **REST API**: Full API for programmatic access 
@@ -19,7 +19,7 @@ A production-level web application that extracts contact information from busine
 The system consists of several modular services:
 
 - **OCR Service**: Handles image preprocessing and text extraction using RapidOCR
-- **Parser Service**: Uses Google Gemini-1.5-flash to extract structured data from raw OCR text  
+- **Parser Service**: Uses Google Gemini-2.5-pro to extract structured data from raw OCR text  
 - **vCard Service**: Generates standard vCard format from structured data
 - **CSV Service**: Generates CSV format from a structured database
 - **FastAPI Application**: Provides a web interface and REST API endpoints
@@ -103,7 +103,7 @@ Key configuration options in `config.py`:
 
 - `MAX_FILE_SIZE`: Maximum upload size (default: 10MB)
 - `ALLOWED_EXTENSIONS`: Supported image formats
-- `GOOGLE_MODEL`: Google model to use (default: gemini-1.5-flash)
+- `GOOGLE_MODEL`: Google model to use (default: gemini-2.5-pro)
 
 ## Data Models
 
