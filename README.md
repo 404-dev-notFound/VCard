@@ -1,5 +1,7 @@
 # Business Card OCR System
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/404-dev-notFound/VCard)
+
 A production-level web application that extracts contact information from business card images using OCR (Optical Character Recognition) and generates vCard and CSV files.
 
 ## Features
