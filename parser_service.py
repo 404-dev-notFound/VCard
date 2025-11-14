@@ -12,8 +12,8 @@ class BusinessCardParser:
         # Configure the SDK with the API key from your config
         try:
             genai.configure(api_key=config.GEMINI_API_KEY)
-            # Initialize the model. You can also use 'gemini-1.5-pro-latest' for higher quality.
-            self.model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            # Initialize the model. You can also use 'gemini-2.5-flash' for faster response.
+            self.model = genai.GenerativeModel('gemini-2.5-pro')
             logger.info("Gemini Pro model initialized successfully.")
         except Exception as e:
             logger.error(f"Failed to configure Gemini SDK: {e}")
