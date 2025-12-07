@@ -12,8 +12,8 @@ class BusinessCardParser:
         # Configure the SDK with the API key from your config
         try:
             genai.configure(api_key=config.GEMINI_API_KEY)
-            # Initialize the model. You can also use 'gemini-1.5-pro-latest' for higher quality.
-            self.model = genai.GenerativeModel('gemini-1.5-flash-latest')
+            # Initialize the model. You can also use 'gemini-2.5-flash' for higher quality.
+            self.model = genai.GenerativeModel('gemini-2.5-pro')
             logger.info("Gemini Pro model initialized successfully.")
         except Exception as e:
             logger.error(f"Failed to configure Gemini SDK: {e}")
@@ -46,12 +46,12 @@ You are an expert information extractor specializing in business cards. Your tas
 - **notes** (string, optional): Any additional information that doesn't fit other fields (e.g., fax numbers, certifications, slogans).
 
 ### IMPORTANT INSTRUCTIONS
-1.  **JSON Only**: Your entire output must be a single, valid JSON object, with no explanatory text or markdown formatting around it.
-2.  **Handle Multiple Values**: If you find more than one value for `mobile`, `telephone`, `email`, or `website`, you **must** return them as a JSON array of strings. If you find only one, return it as an array with a single string.
-3.  **Handle Missing Values**: For optional fields that are not found, use `null`. For required fields that are not found, use an empty string `""`.
-4.  **Identify Websites**: Correctly identify any website, such as `www.example.com` or `example.com`, and place it in the `website` field.
-5.  **Consolidate Notes**: Combine all other miscellaneous text into the single `notes` field.
-
+1.  **Between first name and last name, make sure that any terms like "shipping" or "organization" or "group" means that its company name not person's name even if it is extracted first.
+2.  **JSON Only**: Your entire output must be a single, valid JSON object, with no explanatory text or markdown formatting around it.
+3.  **Handle Multiple Values**: If you find more than one value for `mobile`, `telephone`, `email`, or `website`, you **must** return them as a JSON array of strings. If you find only one, return it as an array with a single string.
+4.  **Handle Missing Values**: For optional fields that are not found, use `null`. For required fields that are not found, use an empty string `""`.
+5.  **Identify Websites**: Correctly identify any website, such as `www.example.com` or `example.com`, and place it in the `website` field.
+6.  **Consolidate Notes**: Combine all other miscellaneous text into the single `notes` field.
 ---
 
 ### BUSINESS CARD TEXT TO PROCESS:

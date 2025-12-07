@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, Form
-from fastapi.responses import HTMLResponse,  StreamingResponse
+from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from PIL import Image
@@ -31,7 +31,6 @@ app = FastAPI(
 os.makedirs(config.UPLOAD_DIR, exist_ok=True)
 os.makedirs(config.OUTPUT_DIR, exist_ok=True)
 
-# Mount static directory for serving CSS, JS, etc.
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 session_storage = {}
@@ -69,8 +68,8 @@ async def process_business_cards(
                 content = await file.read()
                 buffer.write(content)
             
-            image = Image.open(filepath)
-            raw_text = ocr_service.extract_text_from_image(image)
+            with Image.open(filepath) as image:
+                raw_text = ocr_service.extract_text_from_image(image)
             if raw_text:
                 all_text_parts.append(raw_text)
         finally:
@@ -108,7 +107,6 @@ async def process_business_cards(
         vcard=vcard_content,
     )
 
-# ✅ NEW: Add a new endpoint for exporting the CSV
 @app.post("/export-csv")
 async def export_csv(session_id: str = Form(...)):
     if session_id not in session_storage or not session_storage[session_id]:
