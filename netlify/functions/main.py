@@ -2,5 +2,5 @@ def handler(event, context):
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'application/json'},
-        'body': '{"message": "Functions WORK! No FastAPI needed."}'
+        'body': '{"message": "Functions deployed successfully!", "working": true}'
     }
