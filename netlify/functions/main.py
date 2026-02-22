@@ -1,18 +1,6 @@
-from mangum import Mangum
-from fastapi import FastAPI
-
-app = FastAPI(title="Test API")
-
-@app.get("/")
-async def root():
-    return {"message": "FastAPI + Netlify Works!", "status": "success"}
-
-@app.get("/docs")
-async def docs():
-    return {"docs": "Try /simple-api instead"}
-
-@app.get("/simple-api")
-async def simple():
-    return {"api": "working", "endpoints": ["/", "/simple-api"]}
-
-handler = Mangum(app)
+def handler(event, context):
+    return {
+        'statusCode': 200,
+        'headers': {'Content-Type': 'application/json'},
+        'body': '{"message": "Functions WORK! No FastAPI needed."}'
+    }
